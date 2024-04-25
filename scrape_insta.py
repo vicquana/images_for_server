@@ -261,7 +261,7 @@ def get_all_file_data(owner, repo, path=''):
 # Example usage:
 owner = 'vicquana'
 repo = 'images_for_server'
-folder_data = get_all_file_data(owner, repo, 'yeeder0')
+folder_data = get_all_file_data(owner, repo, 'yeeder1')
 
 # Save folder_data as JSON file
 with open('data1.json', 'w', encoding='utf-8') as f:
