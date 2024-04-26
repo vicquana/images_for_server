@@ -264,7 +264,7 @@ repo = 'images_for_server'
 folder_data = get_all_file_data(owner, repo, 'yeeder1')
 
 # Save folder_data as JSON file
-with open('data1.json', 'w', encoding='utf-8') as f:
+with open('yeeder1.json', 'w', encoding='utf-8') as f:
     json.dump(folder_data, f, ensure_ascii=False, indent=4)
 
 # %%
