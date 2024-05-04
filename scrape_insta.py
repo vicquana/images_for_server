@@ -188,6 +188,7 @@ def get_all_file_data(owner, repo, path=''):
         for item in response.json():
             if item['type'] == 'file' and item['name'].endswith('.jpg'):
                 # If it's a .jpg file, add data to the folder_data dictionary
+                print(item['name'])
                 folder_name = path.split('/')[-1]
                 if folder_name not in folder_data:
                     folder_data[folder_name] = {
@@ -209,6 +210,7 @@ def get_all_file_data(owner, repo, path=''):
                 # If it's a directory, recursively fetch files from it and add to folder_data
                 sub_folder_data = get_all_file_data(owner, repo, item['path'])
                 folder_data.update(sub_folder_data)
+                print(item['name'])
         return folder_data
     except requests.exceptions.RequestException as e:
         print('Error fetching file data:', e)
