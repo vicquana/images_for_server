@@ -48,49 +48,6 @@ biography = profile.biography
 # Print or process the biography as needed
 print("Biography:", biography)
 
-# %% saves biography for each subfolder
-
-# Function to get all subfolder names in a directory
-
-
-def get_subfolder_names(directory):
-    #    return [name for name in os.listdir(directory) if os.path.isdir(os.path.join(directory, name))]
-    return [name for name in os.listdir(directory) if os.path.isdir(os.path.join(directory, name)) and name == 'yeeder0']
-
-# Function to download biography using instaloader
-
-
-def download_biography(username, folder_path):
-    L = instaloader.Instaloader()
-    L.load_session_from_file("pihousmith")
-    profile = instaloader.Profile.from_username(L.context, username)
-    biography_file_path = os.path.join(folder_path, 'biography.txt')
-    with open(biography_file_path, 'w', encoding='utf-8') as file:
-        file.write(profile.biography)
-# Main function
-
-
-def main():
-    try:
-        # Navigate to target folder relative to current code file
-        target_folder = os.path.join(
-            os.path.dirname(__file__), 'images_for_server')
-        # Get all subfolder names in the target folder
-        subfolder_names = get_subfolder_names(target_folder)
-
-        print(subfolder_names)
-        # Iterate through each subfolder
-        for subfolder_name in subfolder_names[0:]:
-            subfolder_path = os.path.join(target_folder, subfolder_name)
-            # Download biography of the account (subfolder name)
-            biography = download_biography(subfolder_name, subfolder_path)
-            print(f"Biography of {subfolder_name} saving")
-    except Exception as e:
-        print(f"An error occurred: {str(e)}")
-
-
-if __name__ == "__main__":
-    main()
 
 # %% generate the json of only biography
 
@@ -267,4 +224,46 @@ folder_data = get_all_file_data(owner, repo, 'yeeder1')
 with open('yeeder1.json', 'w', encoding='utf-8') as f:
     json.dump(folder_data, f, ensure_ascii=False, indent=4)
 
-# %%
+# %% update biography for each subfolder
+
+# Function to get all subfolder names in a directory
+
+
+def get_subfolder_names(directory):
+    return [name for name in os.listdir(directory) if os.path.isdir(os.path.join(directory, name))]
+    # return [name for name in os.listdir(directory) if os.path.isdir(os.path.join(directory, name)) and name == 'yeeder0']
+
+# Function to download biography using instaloader
+
+
+def download_biography(username, folder_path):
+    L = instaloader.Instaloader()
+    L.load_session_from_file("pihousmith")
+    profile = instaloader.Profile.from_username(L.context, username)
+    biography_file_path = os.path.join(folder_path, 'biography.txt')
+    with open(biography_file_path, 'w', encoding='utf-8') as file:
+        file.write(profile.biography)
+# Main function
+
+
+def main():
+    # Navigate to target folder relative to current code file
+    target_folder = os.path.join(os.path.dirname(__file__), '')
+    # Get all subfolder names in the target folder
+    subfolder_names = get_subfolder_names(target_folder)
+
+    print(subfolder_names)
+    # Iterate through each subfolder
+    for subfolder_name in subfolder_names[0:]:
+        try:
+            subfolder_path = os.path.join(target_folder, subfolder_name)
+            # Download biography of the account (subfolder name)
+            biography = download_biography(subfolder_name, subfolder_path)
+            print(f"Biography of {subfolder_name} saving")
+        except Exception as e:
+            print(f"An error occurred while processing {
+                  subfolder_name}: {str(e)}")
+
+
+if __name__ == "__main__":
+    main()
