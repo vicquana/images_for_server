@@ -218,10 +218,10 @@ def get_all_file_data(owner, repo, path=''):
 # Example usage:
 owner = 'vicquana'
 repo = 'images_for_server'
-folder_data = get_all_file_data(owner, repo, 'yeeder1')
+folder_data = get_all_file_data(owner, repo, '')
 
 # Save folder_data as JSON file
-with open('yeeder1.json', 'w', encoding='utf-8') as f:
+with open('data2.json', 'w', encoding='utf-8') as f:
     json.dump(folder_data, f, ensure_ascii=False, indent=4)
 
 # %% update biography for each subfolder
