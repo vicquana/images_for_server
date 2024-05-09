@@ -15,9 +15,9 @@ def in_venv():
 in_venv()
 
 # %% use powershell to scraping instagram accounts
-instaloader - -post-filter = "not is_video and likes>1000" ach_nails_studio
+instaloader --post-filter = "not is_video and likes>1000" ach_nails_studio
 
-instaloader - -login = pihousmith - -no-videos - -no-pictures - -no-metadata - -no-compress-json profile 12am_nail
+instaloader --login = pihousmith - -no-videos - -no-pictures - -no-metadata - -no-compress-json profile 12am_nail
 # %% remove profile picture in each subfoler
 
 
