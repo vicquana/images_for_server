@@ -1,0 +1,35 @@
+import os
+import instaloader
+
+
+def update_biography():
+    # Function to get all subfolder names in the directory of update_biography.py
+    directory = os.path.dirname(os.path.abspath(__file__))
+    target_folder = os.path.join(directory, '')
+
+    def get_subfolder_names(directory):
+        return [name for name in os.listdir(directory) if os.path.isdir(os.path.join(directory, name))]
+
+    def download_biography(username, folder_path):
+        L = instaloader.Instaloader()
+        L.load_session_from_file("pihousmith")
+        profile = instaloader.Profile.from_username(L.context, username)
+        biography_file_path = os.path.join(folder_path, 'biography.txt')
+        with open(biography_file_path, 'w', encoding='utf-8') as file:
+            file.write(profile.biography)
+
+    subfolder_names = get_subfolder_names(target_folder)
+
+    print(subfolder_names)
+    for subfolder_name in subfolder_names:
+        try:
+            subfolder_path = os.path.join(target_folder, subfolder_name)
+            biography = download_biography(subfolder_name, subfolder_path)
+            print(f"Biography of {subfolder_name} saved")
+        except Exception as e:
+            print(f"An error occurred while processing {
+                  subfolder_name}: {str(e)}")
+
+
+if __name__ == "__main__":
+    update_biography()
