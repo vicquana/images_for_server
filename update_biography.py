@@ -8,11 +8,11 @@ def update_biography():
     target_folder = os.path.join(directory, '')
 
     def get_subfolder_names(directory):
-        return [name for name in os.listdir(directory) if os.path.isdir(os.path.join(directory, name))]
+        return [name for name in os.listdir(directory) if os.path.isdir(os.path.join(directory, name)) and not name.startswith('.')]
 
     def download_biography(username, folder_path):
         L = instaloader.Instaloader()
-        L.load_session_from_file("pihousmith")
+        # L.load_session_from_file("pihousmith") # this causes error in mac
         profile = instaloader.Profile.from_username(L.context, username)
         biography_file_path = os.path.join(folder_path, 'biography.txt')
         with open(biography_file_path, 'w', encoding='utf-8') as file:
