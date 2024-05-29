@@ -1,8 +1,9 @@
 import requests
 import re
 import json
+import os
 
-def generate_json(owner, repo, path='', token=''):
+def generate_json(owner, repo, path=''):
     def get_biography_text(owner, repo, path, token):
         try:
             headers = {'Authorization': f'token {token}'} if token else {}
@@ -70,6 +71,7 @@ def generate_json(owner, repo, path='', token=''):
             return {}
 
     # Example usage:
+    token = os.getenv('GITHUB_TOKEN')  # Get the token from environment variable
     folder_data = get_all_file_data(owner, repo, '', token)
 
     # Save folder_data as JSON file
@@ -80,6 +82,5 @@ def generate_json(owner, repo, path='', token=''):
 owner = 'your_github_username'
 repo = 'your_repository_name'
 path = 'path_to_files'
-token = 'your_personal_access_token'  # Replace this with your GitHub personal access token
 
-generate_json(owner, repo, path, token)
+generate_json(owner, repo, path)
