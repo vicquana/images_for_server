@@ -6,7 +6,7 @@ import generate_json_private_repo
 update_biography.update_biography()
 
 # Run generate_json
-generate_json.generate_json('vicquana', 'images_for_server', '')
+# generate_json.generate_json('vicquana', 'images_for_server', '')
 # generate_json_private_repo.generate_json('vicquana', 'images_for_server', '')
 
 # commit git
