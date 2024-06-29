@@ -3,7 +3,7 @@ import re
 import json
 
 
-def generate_json(owner, repo, path=''):
+def generate_json(owner='vicquana', repo='images_for_server', path=''):
     def get_biography_text(owner, repo, path):
         try:
             response = requests.get(
