@@ -3,6 +3,7 @@ import time
 import random
 import instaloader
 
+
 def update_biography():
     # Function to get all subfolder names in the directory of update_biography.py
     directory = os.path.dirname(os.path.abspath(__file__))
@@ -28,11 +29,14 @@ def update_biography():
             biography = download_biography(subfolder_name, subfolder_path)
             print(f"Biography of {subfolder_name} saved")
             # Introduce a random delay to avoid request frequency restriction
-            delay = random.randint(30, 90)  # Random delay between 30 and 90 seconds
+            # Random delay between 3 and 9 seconds
+            delay = random.randint(3, 9)
             print(f"Waiting for {delay} seconds before the next request...")
             time.sleep(delay)
         except Exception as e:
-            print(f"An error occurred while processing {subfolder_name}: {str(e)}")
+            print(f"An error occurred while processing {
+                  subfolder_name}: {str(e)}")
+
 
 if __name__ == "__main__":
     update_biography()
