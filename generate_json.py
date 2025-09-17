@@ -78,6 +78,4 @@ def generate_json(owner="vicquana", repo="images_for_server", path=""):
 
     # Save folder_data as JSON file
     with open("data.json", "w", encoding="utf-8") as f:
-        f.write("const data = ")
-        json.dump(folder_data, f, ensure_ascii=False, indent=2)
-        f.write(";\n\nexport default data;\n")
+        json.dump(folder_data, f, ensure_ascii=False, indent=4)
