@@ -38,6 +38,17 @@ This will automatically create a `.venv` container and resolve all libraries sec
 
 We use standard Python commands via `uv`.
 
+### 0. Adding a New Instagram Account
+
+To add a new Instagram account to the scraping pipeline:
+
+1. **Create a Folder:** Create a new directory inside the project root (`images_for_server`). The folder name must match **exactly** the Instagram username you want to scrape (e.g., `new_nail_artist`).
+2. **Add Images (Optional):** If you already have images and descriptions for this account, place them inside the new folder. Ensure images are saved as `.jpg` and descriptions are saved using the format `<base_filename>_UTC.txt`.
+3. **Run the Update Pipeline:** Run the main automation script to fetch the new biography and compile everything.
+   ```bash
+   uv run biography_update_and_json_generation.py
+   ```
+
 ### 1. Manual arrangement & JSON Compilation
 
 This script handles the full pipeline:

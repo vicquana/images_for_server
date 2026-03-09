@@ -17,7 +17,7 @@ def generate_json(owner="vicquana", repo="images_for_server", root_dir="."):
     # Iterate through the subdirectories in the given local directory
     for root, dirs, files in os.walk(root_dir):
         # Ignore hidden folders like .git, .venv, .venv1, __pycache__, etc.
-        dirs[:] = [d for d in dirs if not d.startswith(".")]
+        dirs[:] = [d for d in dirs if not d.startswith(".") and d != "__pycache__"]
 
         folder_name = os.path.basename(root)
         

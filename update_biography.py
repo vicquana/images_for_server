@@ -14,7 +14,9 @@ def update_biography():
         return [
             name
             for name in os.listdir(directory)
-            if os.path.isdir(os.path.join(directory, name)) and not name.startswith(".")
+            if os.path.isdir(os.path.join(directory, name)) 
+            and not name.startswith(".")
+            and name != "__pycache__"
         ]
 
     def download_biography(username, folder_path):
