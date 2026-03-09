@@ -39,10 +39,8 @@ def update_biography():
             print(f"Waiting for {delay} seconds before the next request...")
             time.sleep(delay)
         except Exception as e:
-            print(
-                f"An error occurred while processing {
-                  subfolder_name}: {str(e)}"
-            )
+            print(f"An error occurred while processing {
+                  subfolder_name}: {str(e)}")
 
 
 if __name__ == "__main__":

@@ -6,8 +6,8 @@ import subprocess
 def run_script():
     print("Job started at:", time.strftime("%Y-%m-%d %H:%M:%S"))
     # Replace 'D:\yeeder\images_for_server\biography_update_and_json_generation.py' with the path to your script
-    script_path = r'D:\yeeder\images_for_server\biography_update_and_json_generation.py'
-    subprocess.call(['python', script_path])
+    script_path = r"D:\yeeder\images_for_server\biography_update_and_json_generation.py"
+    subprocess.call(["python", script_path])
     print("Job done at:", time.strftime("%Y-%m-%d %H:%M:%S"))
 
 

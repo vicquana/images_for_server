@@ -16,7 +16,7 @@ subprocess.run(["git", "commit", "-m", commit_message])
 subprocess.run(["git", "push"])
 
 # Run generate_json
-generate_json.generate_json('vicquana', 'images_for_server', '')
+generate_json.generate_json("vicquana", "images_for_server", "")
 # generate_json_private_repo.generate_json('vicquana', 'images_for_server', '')
 
 # commit git
