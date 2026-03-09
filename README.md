@@ -1,6 +1,6 @@
-# Instagram Scraper & Server Data Pipeline 💅
+#  Server Data Pipeline 💅
 
-A data pipeline automation repository that scrapes Instagram profiles (nail studios/artists), gathers their images, bios, and descriptions, and compiles them into a structured JSON database (`data.json`) designed to be served directly from the repository.
+A data pipeline automation repository that extract Instagram profiles (nail studios/artists), gathers their images, bios, and descriptions, and compiles them into a structured JSON database (`data.json`) designed to be served directly from the repository.
 
 ## Overview
 1. **Bio Fetching**: Uses `instaloader` to routinely fetch the biography texts for various Instagram subdirectories.
@@ -38,7 +38,7 @@ This will automatically create a `.venv` container and resolve all libraries sec
 
 We use standard Python commands via `uv`.
 
-### 1. Manual Scraping & JSON Compilation
+### 1. Manual arrangement & JSON Compilation
 
 This script handles the full pipeline:
 - Updating biographies in all valid subdirectories.
@@ -74,9 +74,3 @@ uv run schedule_update.py
 - **`schedule_update.py`**: Run-forever task that manages execution timing.
 - **`update_biography.py`**: Interacts with `instaloader` and downloads `biography.txt` files for local user folders.
 
-### 🧹 Recent Refactors
-
-- Migrated Python environment mapping to `uv` and `pyproject.toml`.
-- Rebuilt `.gitignore` to prevent any large Python garbage/environment artifacts.
-- Removed redundant scraper scratchpad scripts (`scrape_insta.py` and GitHub API scripts) that significantly slowed down operations and duplicated codebase efforts.
-- Replaced dangerous hardcoded absolute paths (`D:\yeeder\...`) referencing old developer machines with safe Python relative variables (`os.path.join()`).
