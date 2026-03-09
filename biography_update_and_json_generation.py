@@ -2,31 +2,31 @@ import subprocess
 import update_biography
 import generate_json
 
-# Run update_biography
-update_biography.update_biography()
+def run_git_command(args, check=True):
+    try:
+        subprocess.run(["git"] + args, check=check)
+    except subprocess.CalledProcessError as e:
+        print(f"Git command failed: {e}")
 
-# # Add changes
-subprocess.run(["git", "add", "."])
+def main():
+    # Update biographies
+    print("Updating biographies...")
+    update_biography.update_biography()
 
-# # Commit changes
-commit_message = "update biography text files"
-subprocess.run(["git", "commit", "-m", commit_message])
+    # Commit and push biographies
+    run_git_command(["add", "."])
+    # Don't check=True for commit because it fails if there are no changes
+    run_git_command(["commit", "-m", "update biography text files"], check=False)
+    run_git_command(["push"])
 
-# # Push changes
-subprocess.run(["git", "push"])
+    # Generate JSON
+    print("Generating JSON payload...")
+    generate_json.generate_json("vicquana", "images_for_server", ".")
 
-# Run generate_json
-generate_json.generate_json("vicquana", "images_for_server", "")
-# generate_json_private_repo.generate_json('vicquana', 'images_for_server', '')
+    # Commit and push JSON
+    run_git_command(["add", "."])
+    run_git_command(["commit", "-m", "update json database"], check=False)
+    run_git_command(["push"])
 
-# commit git
-
-# Add changes
-subprocess.run(["git", "add", "."])
-
-# Commit changes
-commit_message = "update json"
-subprocess.run(["git", "commit", "-m", commit_message])
-
-# Push changes
-subprocess.run(["git", "push"])
+if __name__ == "__main__":
+    main()
