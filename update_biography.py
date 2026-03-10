@@ -41,11 +41,11 @@ def update_biography():
             if index < len(subfolder_names) - 1:
                 # Introduce a random delay to avoid Instagram's strict rate limits
                 # Random delay between 30 and 60 seconds to mimic human behavior
-                delay = random.randint(30, 60)
+                delay = random.randint(3, 9)
                 
                 # Take a longer breather every 5 requests
                 if (index + 1) % 5 == 0:
-                    delay += random.randint(60, 120)
+                    delay += random.randint(3, 9)
                     print(f"Taking a longer break for {delay} seconds to prevent rate-limiting...")
                 else:
                     print(f"Waiting for {delay} seconds before the next request...")
