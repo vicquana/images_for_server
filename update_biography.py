@@ -19,8 +19,9 @@ def update_biography():
             and name != "__pycache__"
         ]
 
+    L = instaloader.Instaloader()
+
     def download_biography(username, folder_path):
-        L = instaloader.Instaloader()
         # L.load_session_from_file("pihousmith") # this causes error in mac
         profile = instaloader.Profile.from_username(L.context, username)
         biography_file_path = os.path.join(folder_path, "biography.txt")
