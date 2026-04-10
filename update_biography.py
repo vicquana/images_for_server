@@ -24,7 +24,7 @@ def update_biography():
     subfolder_names = get_subfolder_names(target_folder)
     print(f"Found {len(subfolder_names)} subfolders.")
 
-    for subfolder_name in subfolder_names:
+    for index, subfolder_name in enumerate(subfolder_names):
         try:
             subfolder_path = os.path.join(target_folder, subfolder_name)
 
@@ -37,10 +37,16 @@ def update_biography():
 
             print(f"Success: {subfolder_name}")
 
-            # 3. 顯著增加延遲時間
-            delay = random.randint(30, 90)
-            print(f"Waiting {delay}s...")
-            time.sleep(delay)
+            if index < len(subfolder_names) - 1:
+                delay = random.randint(30, 90)
+
+                if (index + 1) % 5 == 0:
+                    delay += random.randint(60, 180)
+                    print(f"Taking a longer break for {delay}s...")
+                else:
+                    print(f"Waiting {delay}s...")
+
+                time.sleep(delay)
 
         except instaloader.exceptions.ConnectionException as e:
             print(f"IP 被暫時封鎖: {e}")
