@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import tempfile
 
 
 def generate_json(owner="vicquana", repo="images_for_server", root_dir="."):
@@ -17,7 +18,11 @@ def generate_json(owner="vicquana", repo="images_for_server", root_dir="."):
     # Iterate through the subdirectories in the given local directory
     for root, dirs, files in os.walk(root_dir):
         # Ignore hidden folders like .git, .venv, .venv1, __pycache__, etc.
-        dirs[:] = [d for d in dirs if not d.startswith(".") and d != "__pycache__"]
+        dirs[:] = [
+            d
+            for d in dirs
+            if not d.startswith(".") and d not in {"__pycache__", "tests"}
+        ]
 
         folder_name = os.path.basename(root)
         
@@ -70,8 +75,24 @@ def generate_json(owner="vicquana", repo="images_for_server", root_dir="."):
 
     # Save to JSON file
     output_path = os.path.join(root_dir, "data.json")
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(folder_data, f, ensure_ascii=False, indent=4)
+    temporary_path = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=root_dir,
+            prefix=".data.json.",
+            suffix=".tmp",
+            delete=False,
+        ) as f:
+            json.dump(folder_data, f, ensure_ascii=False, indent=4)
+            f.write("\n")
+            temporary_path = f.name
+
+        os.replace(temporary_path, output_path)
+    finally:
+        if temporary_path is not None and os.path.exists(temporary_path):
+            os.unlink(temporary_path)
     
     print(f"Generated {output_path} successfully.")
 

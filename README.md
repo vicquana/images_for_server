@@ -54,12 +54,40 @@ To add a new Instagram account to the scraping pipeline:
 This script handles the full pipeline:
 - Updating biographies in all valid subdirectories.
 - Generating the master `data.json` database.
-- Committing everything automatically via Git.
-- Pushing updates to the remote repository.
+- Committing changed biography files and `data.json` automatically via Git.
+- Pushing successful updates even when some Instagram profiles fail.
 
 ```bash
 uv run biography_update_and_json_generation.py
 ```
+
+The command exits with status `2` when only part of the Instagram update succeeds.
+Successful biographies are still published, while failed profiles keep their previous
+`biography.txt` content. A blocking `401` or `429` response stops further Instagram
+requests, but biographies completed earlier in the run are still generated and pushed.
+
+### 1.1 Recommended Instagram Session Setup
+
+Anonymous Instagram access is more likely to be rate-limited. Create a reusable
+Instaloader session interactively (never put the Instagram password in this repository):
+
+```bash
+uv run instaloader --login YOUR_INSTAGRAM_USERNAME \
+  --sessionfile .instaloader-session
+chmod 600 .instaloader-session
+```
+
+Configure the same account and session path for manual runs and the scheduler:
+
+```bash
+export INSTAGRAM_USERNAME="YOUR_INSTAGRAM_USERNAME"
+export INSTALOADER_SESSION_FILE="$PWD/.instaloader-session"
+uv run biography_update_and_json_generation.py
+```
+
+The session file, local update state, and scheduler lock are ignored by Git. If no
+`INSTAGRAM_USERNAME` is configured, the updater continues in anonymous mode and prints
+a warning.
 
 ### 2. Manual JSON Generation Only
 If you only want to compile the local folders into `data.json` without any network requests to Instagram or Github:
@@ -85,3 +113,11 @@ uv run schedule_update.py
 - **`schedule_update.py`**: Run-forever task that manages execution timing.
 - **`update_biography.py`**: Interacts with `instaloader` and downloads `biography.txt` files for local user folders.
 
+### 4. Tests
+
+The tests simulate successful, failed, and blocked Instagram responses without making
+network requests:
+
+```bash
+uv run python -m unittest discover -s tests -v
+```

@@ -128,6 +128,11 @@ ENV/
 env.bak/
 venv.bak/
 
+# Local Instagram update state, lock, and credentials
+.biography_update_state.json
+.biography_update.lock
+.instaloader-session*
+
 # Spyder project settings
 .spyderproject
 .spyproject
