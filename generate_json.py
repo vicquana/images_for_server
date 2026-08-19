@@ -3,7 +3,7 @@ import os
 import re
 
 
-def generate_json(owner="vicquana", repo="images_for_server", root_dir="."):
+def generate_json(owner="vicquana", repo="images_for_server", root_dir=".", branch="main"):
     """
     Generates a structured JSON string by iterating through local directories.
     Instead of making network calls to GitHub, we construct the download raw URLs
@@ -12,7 +12,7 @@ def generate_json(owner="vicquana", repo="images_for_server", root_dir="."):
     folder_data = {}
 
     # Define the base raw content URL for GitHub
-    base_raw_url = f"https://raw.githubusercontent.com/{owner}/{repo}/master"
+    base_raw_url = f"https://raw.githubusercontent.com/{owner}/{repo}/{branch}"
 
     # Iterate through the subdirectories in the given local directory
     for root, dirs, files in os.walk(root_dir):
